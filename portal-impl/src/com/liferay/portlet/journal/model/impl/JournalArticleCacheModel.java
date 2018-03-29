@@ -20,13 +20,10 @@ import com.liferay.portal.model.CacheModel;
 
 import com.liferay.portlet.journal.model.JournalArticle;
 
-import java.io.ByteArrayOutputStream;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-
-import java.nio.charset.Charset;
 
 import java.util.Date;
 
@@ -286,39 +283,39 @@ public class JournalArticleCacheModel implements CacheModel<JournalArticle>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
-		uuid = readUTF(objectInput);
+		uuid = objectInput.readUTF();
 		id = objectInput.readLong();
 		resourcePrimKey = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
-		userName = readUTF(objectInput);
+		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		folderId = objectInput.readLong();
 		classNameId = objectInput.readLong();
 		classPK = objectInput.readLong();
-		treePath = readUTF(objectInput);
-		articleId = readUTF(objectInput);
+		treePath = objectInput.readUTF();
+		articleId = objectInput.readUTF();
 		version = objectInput.readDouble();
-		title = readUTF(objectInput);
-		urlTitle = readUTF(objectInput);
-		description = readUTF(objectInput);
-		content = readUTF(objectInput);
-		type = readUTF(objectInput);
-		structureId = readUTF(objectInput);
-		templateId = readUTF(objectInput);
-		layoutUuid = readUTF(objectInput);
+		title = objectInput.readUTF();
+		urlTitle = objectInput.readUTF();
+		description = objectInput.readUTF();
+		content = CacheUtil.readUTF(objectInput);
+		type = objectInput.readUTF();
+		structureId = objectInput.readUTF();
+		templateId = objectInput.readUTF();
+		layoutUuid = objectInput.readUTF();
 		displayDate = objectInput.readLong();
 		expirationDate = objectInput.readLong();
 		reviewDate = objectInput.readLong();
 		indexable = objectInput.readBoolean();
 		smallImage = objectInput.readBoolean();
 		smallImageId = objectInput.readLong();
-		smallImageURL = readUTF(objectInput);
+		smallImageURL = objectInput.readUTF();
 		status = objectInput.readInt();
 		statusByUserId = objectInput.readLong();
-		statusByUserName = readUTF(objectInput);
+		statusByUserName = objectInput.readUTF();
 		statusDate = objectInput.readLong();
 	}
 
@@ -326,10 +323,10 @@ public class JournalArticleCacheModel implements CacheModel<JournalArticle>,
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {
-			writeUTF(objectOutput, StringPool.BLANK);
+			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			writeUTF(objectOutput, uuid);
+			objectOutput.writeUTF(uuid);
 		}
 
 		objectOutput.writeLong(id);
@@ -339,10 +336,10 @@ public class JournalArticleCacheModel implements CacheModel<JournalArticle>,
 		objectOutput.writeLong(userId);
 
 		if (userName == null) {
-			writeUTF(objectOutput, StringPool.BLANK);
+			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			writeUTF(objectOutput, userName);
+			objectOutput.writeUTF(userName);
 		}
 
 		objectOutput.writeLong(createDate);
@@ -352,75 +349,75 @@ public class JournalArticleCacheModel implements CacheModel<JournalArticle>,
 		objectOutput.writeLong(classPK);
 
 		if (treePath == null) {
-			writeUTF(objectOutput, StringPool.BLANK);
+			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			writeUTF(objectOutput, treePath);
+			objectOutput.writeUTF(treePath);
 		}
 
 		if (articleId == null) {
-			writeUTF(objectOutput, StringPool.BLANK);
+			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			writeUTF(objectOutput, articleId);
+			objectOutput.writeUTF(articleId);
 		}
 
 		objectOutput.writeDouble(version);
 
 		if (title == null) {
-			writeUTF(objectOutput, StringPool.BLANK);
+			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			writeUTF(objectOutput, title);
+			objectOutput.writeUTF(title);
 		}
 
 		if (urlTitle == null) {
-			writeUTF(objectOutput, StringPool.BLANK);
+			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			writeUTF(objectOutput, urlTitle);
+			objectOutput.writeUTF(urlTitle);
 		}
 
 		if (description == null) {
-			writeUTF(objectOutput, StringPool.BLANK);
+			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			writeUTF(objectOutput, description);
+			objectOutput.writeUTF(description);
 		}
 
 		if (content == null) {
-			writeUTF(objectOutput, StringPool.BLANK);
+			CacheUtil.writeUTF(objectOutput, StringPool.BLANK);
 		}
 		else {
-			writeUTF(objectOutput, content);
+			CacheUtil.writeUTF(objectOutput, content);
 		}
-
+		
 		if (type == null) {
-			writeUTF(objectOutput, StringPool.BLANK);
+			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			writeUTF(objectOutput, type);
+			objectOutput.writeUTF(type);
 		}
 
 		if (structureId == null) {
-			writeUTF(objectOutput, StringPool.BLANK);
+			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			writeUTF(objectOutput, structureId);
+			objectOutput.writeUTF(structureId);
 		}
 
 		if (templateId == null) {
-			writeUTF(objectOutput, StringPool.BLANK);
+			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			writeUTF(objectOutput, templateId);
+			objectOutput.writeUTF(templateId);
 		}
 
 		if (layoutUuid == null) {
-			writeUTF(objectOutput, StringPool.BLANK);
+			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			writeUTF(objectOutput, layoutUuid);
+			objectOutput.writeUTF(layoutUuid);
 		}
 
 		objectOutput.writeLong(displayDate);
@@ -431,54 +428,23 @@ public class JournalArticleCacheModel implements CacheModel<JournalArticle>,
 		objectOutput.writeLong(smallImageId);
 
 		if (smallImageURL == null) {
-			writeUTF(objectOutput, StringPool.BLANK);
+			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			writeUTF(objectOutput, smallImageURL);
+			objectOutput.writeUTF(smallImageURL);
 		}
 
 		objectOutput.writeInt(status);
 		objectOutput.writeLong(statusByUserId);
 
 		if (statusByUserName == null) {
-			writeUTF(objectOutput, StringPool.BLANK);
+			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			writeUTF(objectOutput, statusByUserName);
+			objectOutput.writeUTF(statusByUserName);
 		}
 
 		objectOutput.writeLong(statusDate);
-	}
-	
-	private final Charset UTF8_CHARSET = Charset.forName("UTF-8");
-
-	private void writeUTF(ObjectOutput out, String s) throws IOException {
-		final byte[] buf = s.getBytes(UTF8_CHARSET);
-		out.writeInt(buf.length);
-		if (buf.length > 0) {
-			out.write(buf);
-		}
-	}
-
-	private String readUTF(ObjectInput in) throws IOException {
-		int remaining = in.readInt();
-		if (remaining == 0) {
-			return StringPool.BLANK;
-		}
-
-		final ByteArrayOutputStream bos = new ByteArrayOutputStream(remaining);
-		final byte[] tmp = new byte[remaining];
-		int n = 0;
-		while ( (n = in.read(tmp, 0, remaining)) != -1 && remaining != 0 ) {
-			remaining -= n;
-			bos.write(tmp, 0, n);
-		}
-
-                if (remaining > 0) {
-                       throw new java.io.IOException("truncated read of UTF from ObjectInput:  " + remaining + " bytes still expected...");
-                }
-
-                return new String(bos.toByteArray(), UTF8_CHARSET);
 	}
 
 	public String uuid;
