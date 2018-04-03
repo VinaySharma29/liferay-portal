@@ -41,22 +41,17 @@ public class CacheUtil {
 		if (remaining < 1) {
 			return StringPool.BLANK;
 		}
+		
+		final char[] cbuf = new char[1024*8];
+		final ObjectInputCharsetReader reader =
+			new ObjectInputCharsetReader(in, remaining, cbuf.length, UTF8);
+		final StringBuilder sbuf = new StringBuilder();
 
-		// note that we're not being very memory efficent here, we're
-		// ultimately using 3x the size of the byte[] to (a) build up the
-		// ByteArrayOutputStream then and (b) convert that into a String.
-		final ByteArrayOutputStream bos = new ByteArrayOutputStream(remaining);
-		final byte[] tmp = new byte[remaining];
 		int n = 0;
-		while ( (n = in.read(tmp, 0, remaining)) != -1 && remaining > 0 ) {
-			remaining -= n;
-			bos.write(tmp, 0, n);
+		while((n = reader.read(cbuf, 0, cbuf.length)) != -1) {
+			sbuf.append(cbuf, 0, n);
 		}
 
-                if (remaining > 0) {
-                       throw new IOException("truncated read of UTF from ObjectInput:  " + remaining + " bytes still expected...");
-                }
-
-                return new String(bos.toByteArray(), UTF8);
+		return sbuf.toString();
 	}
 }
