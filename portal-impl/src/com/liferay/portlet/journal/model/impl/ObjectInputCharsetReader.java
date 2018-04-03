@@ -117,7 +117,7 @@ public class ObjectInputCharsetReader {
 	 * or -1 if the underlying limit has been reached.
 	 *
 	 * @return a char read from the ObjectInput, or -1 on EOF
-	 * @ throws IOException
+	 * @throws IOException
 	 */
 	public int read() throws IOException {
 		while(true) {
