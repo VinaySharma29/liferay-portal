@@ -300,7 +300,7 @@ public class JournalArticleCacheModel implements CacheModel<JournalArticle>,
 		version = objectInput.readDouble();
 		title = objectInput.readUTF();
 		urlTitle = objectInput.readUTF();
-		description = objectInput.readUTF();
+		description = CacheUtil.readUTF(objectInput);
 		content = CacheUtil.readUTF(objectInput);
 		type = objectInput.readUTF();
 		structureId = objectInput.readUTF();
@@ -379,10 +379,10 @@ public class JournalArticleCacheModel implements CacheModel<JournalArticle>,
 		}
 
 		if (description == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
+			CacheUtil.writeUTF(objectOutput, StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(description);
+			CacheUtil.writeUTF(objectOutput, description);
 		}
 
 		if (content == null) {
